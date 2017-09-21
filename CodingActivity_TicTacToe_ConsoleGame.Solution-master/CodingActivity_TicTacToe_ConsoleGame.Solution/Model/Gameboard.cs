@@ -198,6 +198,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
 
             Boolean isCatsGame = false;
+            int filled = 0;
 
             foreach (PlayerPiece[,] board in _boards)
             {
@@ -207,14 +208,15 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                     {
                         if (board[row, column] != PlayerPiece.None)
                         {
-                            isCatsGame = true;
-                        }
-                        else
-                        {
-                            isCatsGame = false;
+                            filled++;
                         }
                     }
                 }
+            }
+
+            if(filled>=27)
+            {
+                isCatsGame = true;
             }
 
             return isCatsGame;
@@ -230,8 +232,10 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             Boolean isWon = false;
 
             isWon = CheckLayerWin(playerPieceToCheck);
-
-            isWon = Check3DWin(playerPieceToCheck);
+            if(!isWon)
+            {
+                isWon = Check3DWin(playerPieceToCheck);
+            }
 
             //
             // No Player Has Won
