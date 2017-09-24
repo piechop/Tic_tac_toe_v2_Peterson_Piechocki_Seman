@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 
 namespace CodingActivity_TicTacToe_ConsoleGame
 {
-    public class ConsoleView
+    public class ConsoleView : Gameboard
     {
         #region ENUMS
 
@@ -24,10 +24,10 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
         private const int GAMEBOARD_VERTICAL_LOCATION = 4;
 
-        private const int POSITIONPROMPT_VERTICAL_LOCATION = 12;
+        private const int POSITIONPROMPT_VERTICAL_LOCATION = 14;
         private const int POSITIONPROMPT_HORIZONTAL_LOCATION = 3;
 
-        private const int MESSAGEBOX_VERTICAL_LOCATION = 45;
+        private const int MESSAGEBOX_VERTICAL_LOCATION = 16;
 
         private const int TOP_LEFT_ROW = 3;
         private const int TOP_LEFT_COLUMN = 6;
@@ -176,16 +176,16 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         {
             StringBuilder sb = new StringBuilder();
 
-            ConsoleUtil.HeaderText = "The Tic-tac-toe Game";
+            ConsoleUtil.HeaderText = "The 3D Tic-tac-toe Game";
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Written by John Velis");
+            ConsoleUtil.DisplayMessage("Written by Paul Piechocki, Scott Peterson, and Michael Seman");
             ConsoleUtil.DisplayMessage("Northwestern Michigan College");
             Console.WriteLine();
 
             sb.Clear();
             sb.AppendFormat("This application is designed to allow two players to play ");
-            sb.AppendFormat("a game of tic-tac-toe. The rules are the standard rules for the ");
+            sb.AppendFormat("a game of 3D tic-tac-toe. The rules are the standard rules for the ");
             sb.AppendFormat("game with each player taking a turn.");
             ConsoleUtil.DisplayMessage(sb.ToString());
             Console.WriteLine();
@@ -193,6 +193,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             sb.Clear();
             sb.AppendFormat("Your first task will be to set up your account details.");
             ConsoleUtil.DisplayMessage(sb.ToString());
+
 
             DisplayContinuePrompt();
         }
@@ -202,13 +203,15 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         /// </summary>
         public void DisplayClosingScreen()
         {
-            ConsoleUtil.HeaderText = "The Tic-tac-toe Game";
+            ConsoleUtil.HeaderText = "The 3D Tic-tac-toe Game";
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Thank you for using The Tic-tac-toe Game.");
+            ConsoleUtil.DisplayMessage("Thank you for playing The 3D Tic-tac-toe Game.");
 
-            DisplayContinuePrompt();
+            DisplayExitPrompt();
         }
+
+
 
         public void DisplayGameArea()
         {
@@ -314,30 +317,95 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             Console.SetCursorPosition(0, GAMEBOARD_VERTICAL_LOCATION);
 
+
+
             foreach (Gameboard.PlayerPiece[,] board in _gameboard.Boards)
             {
-                Console.Write("\t\t\t        |---+---+---|\n");
-                for (int i = 0; i < 3; i++)
+
+                if (board == _gameboard.FirstBoard)
                 {
-                    Console.Write("\t\t\t        | ");
-
-                    for (int j = 0; j < 3; j++)
+                    Console.SetCursorPosition(0, GAMEBOARD_VERTICAL_LOCATION);
+                    Console.Write("\t\t\t\t\t\t        Board One\n");
+                    Console.Write("\t\t\t\t\t\t      |---+---+---|\n");
+                    for (int i = 0; i < 3; i++)
                     {
-                        if (board[i, j] == Gameboard.PlayerPiece.None)
+                        Console.Write("\t\t\t\t\t\t      | ");
+
+                        for (int j = 0; j < 3; j++)
                         {
-                            Console.Write(" " + " | ");
-                        }
-                        else
-                        {
-                            Console.Write(board[i, j] + " | ");
+                            if (board[i, j] == Gameboard.PlayerPiece.None)
+                            {
+                                Console.Write(" " + " | ");
+                            }
+                            else
+                            {
+                                Console.Write(board[i, j] + " | ");
+                            }
+
                         }
 
+                        Console.Write("\n\t\t\t\t\t\t      |---+---+---|\n");
                     }
 
-                    Console.Write("\n\t\t\t        |---+---+---|\n");
+                    Console.WriteLine();
                 }
 
-                Console.WriteLine();
+                else if (board == _gameboard.SecondBoard)
+                {
+                    Console.SetCursorPosition(0, GAMEBOARD_VERTICAL_LOCATION);
+                    Console.Write("\t\t\t\t        Board Two\n");
+                    Console.Write("\t\t\t\t      |---+---+---|\n");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.Write("\t\t\t\t      | ");
+
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (board[i, j] == Gameboard.PlayerPiece.None)
+                            {
+                                Console.Write(" " + " | ");
+                            }
+                            else
+                            {
+                                Console.Write(board[i, j] + " | ");
+                            }
+
+                        }
+
+                        Console.Write("\n\t\t\t\t      |---+---+---|\n");
+                    }
+
+                    Console.WriteLine();
+                }
+
+                else if (board == _gameboard.ThirdBoard)
+                {
+                    Console.SetCursorPosition(0, GAMEBOARD_VERTICAL_LOCATION);
+                    Console.Write("\t\t       Board Three\n");
+                    Console.Write("\t\t      |---+---+---|\n");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.Write("\t\t      | ");
+
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (board[i, j] == Gameboard.PlayerPiece.None)
+                            {
+                                Console.Write(" " + " | ");
+                            }
+                            else
+                            {
+                                Console.Write(board[i, j] + " | ");
+                            }
+
+                        }
+
+                        Console.Write("\n\t\t      |---+---+---|\n");
+                    }
+
+                    Console.WriteLine();
+                }
+
             }
         }
 
