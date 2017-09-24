@@ -273,7 +273,22 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                     break;
                 }
             }
-
+            //
+            // Check stack for player win
+            //
+            for (int column = 0; column < 3; column++)
+            {
+                for(int row = 0; row < 3; row++)
+                {
+                    if (_boards[0][row, column] == playerPieceToCheck &&
+                    _boards[1][row, column] == playerPieceToCheck &&
+                    _boards[2][row, column] == playerPieceToCheck)
+                    {
+                        isWon = true;
+                        break;
+                    }
+                }
+            }
             //
             // Check diagonals for player win (8 ways)
             //
