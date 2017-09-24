@@ -15,14 +15,14 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         private bool _playingGame;
         private bool _playingRound;
 
-        private int _roundNumber;
+        public static int _roundNumber;
 
         //
         // track the results of multiple rounds
         //
-        private int _playerXNumberOfWins;
-        private int _playerONumberOfWins;
-        private int _numberOfCatsGames;
+        public static int _playerXNumberOfWins;
+        public static int _playerONumberOfWins;
+        public static int _numberOfCatsGames;
 
         //
         // instantiate  a Gameboard object
@@ -80,6 +80,8 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         {
             _gameView.DisplayWelcomeScreen();
 
+            _playingGame = _gameView.DisplayMainMenu();
+
             while (_playingGame)
             {
                 //
@@ -117,6 +119,11 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                         _gameboard.InitializeGameboard();
                         _gameView.InitializeView();
                         _playingRound = true;
+                    }
+
+                    else
+                    {
+                        _playingGame = false;
                     }
                 }
                 //

@@ -199,6 +199,76 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         }
 
         /// <summary>
+        /// Display a main menu after the welcome screen
+        /// give player the menu choices
+        /// </summary>
+        public bool DisplayMainMenu()
+        {
+
+            string a = "Tic-Tac-Toe";
+            string b = "3x3x3";
+            string c = "Main Menu";
+            bool exitApplication = true;
+
+            StringBuilder sb1 = new StringBuilder();
+
+            ConsoleUtil.HeaderText = "The Tic-tac-toe Game";
+            ConsoleUtil.DisplayReset();
+
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+
+            Console.SetCursorPosition((Console.WindowWidth - b.Length) / 2, Console.CursorTop);
+            Console.WriteLine(b);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.SetCursorPosition((Console.WindowWidth - c.Length) / 2, Console.CursorTop);
+            Console.WriteLine(c);
+            Console.WriteLine();
+
+            ConsoleUtil.DisplayMessage("1. New Game");
+            //ConsoleUtil.DisplayMessage("2. Load Game");
+            ConsoleUtil.DisplayMessage("2. View Game Stats");
+            ConsoleUtil.DisplayMessage("3. Quit Game");
+            Console.WriteLine();
+
+            switch (GetPlayerMenuChoice())
+            {
+                case "1":
+
+                    exitApplication = true;
+                    return exitApplication;
+
+
+                //case "2":
+
+
+                //    exitApplication = true;
+                //    return exitApplication;
+
+                case "2":
+                    DisplayCurrentGameStatus(GameController._roundNumber, GameController._playerXNumberOfWins, GameController._playerONumberOfWins, GameController._numberOfCatsGames);
+
+                    exitApplication = true;
+                    return exitApplication;
+
+                case "3":
+
+                    exitApplication = false;
+                    return exitApplication;
+
+                default:
+                    Console.WriteLine("You must enter a valid response.");
+                    DisplayContinuePrompt();
+                    DisplayMainMenu();
+                    break;
+            }
+
+            return exitApplication;
+        }
+
+        /// <summary>
         /// display a closing screen when the user quits the application
         /// </summary>
         public void DisplayClosingScreen()
@@ -466,6 +536,19 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             }
 
             return yesNoChoice;
+        }
+
+        /// <summary>
+        /// Get the players menu choice
+        /// </summary>
+        /// <returns></returns>
+        public string GetPlayerMenuChoice()
+        {
+            string menuchoice;
+            Console.WriteLine("Enter the value of your menu choice.");
+
+            menuchoice = Console.ReadLine();
+            return menuchoice;
         }
 
         /// <summary>
